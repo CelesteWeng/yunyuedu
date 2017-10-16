@@ -1,0 +1,1779 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>my网易云阅读</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<style>
+	*{margin:0px;padding:0px; border:0;}
+	body{margin:0;padding:  0; font-family: "微软雅黑";border: 0;}
+	.clear{clear:both;}
+	li{list-style: none;}
+	/*导航栏开始*/
+	.nav_box{width:100%; height:35px;border-bottom: 1px solid #dcdcdc; background: #fafafa;}
+	.nav{width:980px;margin:0 auto; height:35px;line-height: 35px;position:relative;z-index:1;}
+	.nav_left{float:left;height:35px;}
+	.nav_right{float:right;height:35px;}
+	.nav a{display: block; height:35px;line-height: 35px;float:left;}
+	.nav a:link,.nav a:visited{text-decoration:none;color: #888;font-size:9pt;}
+	.nav a:hover{color:#c9483c;}
+	.nav a.code{position:relative;}
+	.nav a img{;width: 100px; position:absolute;top:30px;right:0px;display: none;}
+	.nav a.code:hover img{display: block;}
+	.nav span{color: #888;font-size:9pt;padding:0 9pt;float:left;}
+	
+		/*登录开始*/
+	.login{background: url(images/load.png) no-repeat 28px -308px;position:relative;float: left}
+	.login .text1{padding-right: 10px;}  /*登录右边间距10px，露出向下箭头*/
+	.login .login_list{background: url(images/login_bg.png) no-repeat;width:160px;height:207px;position: absolute;top:35px;left:-55px;padding-top:0px;display: none;}/* 带背景大div*/
+	.login:hover .login_list{display:block;}
+	
+	.login .login_list ul{list-style: none;margin-top: 6px;/*背景方框箭头占高6px*/ height:220px}  /*logo加文字部分box*/
+	
+	.login .login_list ul li{position: relative;width:137px;height: 39px;line-height: 39px;border-bottom: 1px dotted #cdcdcd;margin:0 auto;*height: 35px;*line-height: 40px;} /*每一行*/
+
+	
+	.login_list span{line-height: 39px;padding-left:35px;}
+	.wy .tiny_logo{position:absolute;background:  url(images/header.png) no-repeat -193px -304px;width:20px;height:20px;padding:0;/*取消从.nav span继承的padding，使logo不多显示*/ top:13px;left:7px;} /*网易logo,li为父级*/
+	.xl .xl_logo{position:absolute;background: url(images/header.png) no-repeat -193px -324px;width:20px;height:20px;padding:0;top:13px;left:7px;}/*新浪logo*/
+	.tx .tx_logo{position:absolute;background: url(images/header.png) no-repeat -193px -344px;width:20px;height:20px;padding:0;top:13px;left:7px;}/*腾讯logo*/
+	.phone .phone_logo{position:absolute;background: url(images/header.png) no-repeat -193px -365px;width:20px;height:20px;padding:0;top:13px;left:7px;}/*手机号logo*/
+	.wx .wx_logo{position:absolute;background: url(images/header.png) no-repeat -193px -426px;width:20px;height:20px;padding:0;top:13px;left:7px;}/*微信logo*/
+	
+	.login_list a:hover span{color:#c9483c;}
+		  /*登录结束*/
+	/*导航栏结束*/
+	
+	/*headertop开始*/
+	.headertop{position:relative;min-width:980px;height: 106px;}
+	.inner{height:36px;width:980px;display: block;margin:0 auto;padding-top: 40px;}
+	.logo{display:block;float:left;width:194px;}
+	.logo a{background: url(images/load.png) no-repeat;display: block;height:36px;}
+	
+	.sch{width:25pc;height:36px;float:left;padding:0;margin:0;padding-left: 88px;}
+	.input{font-size:14px;color:#868686;width:349px;height:34px;border: 0;border: 1px solid #c9483c;padding-left:9px;float: left;outline:none;}
+	
+	.button{float:left;background: url(images/load.png) no-repeat -2px -56px;width:40px;height:36px;border: 0;cursor:pointer;}
+	
+	.cloud{width:200px;float: right;height:34px;border: 1px solid #ebe6e1;font-size:14px;line-height:34px;}
+	.cloud a:link,.cloud a:visited{text-decoration:none;color: #655;}
+	.cloud a:hover{background-color:#f5f5f5;}
+	.cloud .subscribe{height:34px;border-right: 1px solid #ebe6e1;width:66px;float: left;background: url(images/load.png) no-repeat 13px -121px;padding-left: 33px;}
+	.cloud .bookcase{height:34px;width:67px;background: url(images/load.png) no-repeat 13px -175px;float: right;padding-left: 33px;}
+	/*headertop结束*/
+	
+	/*headerbottom开始*/
+	.headerbottom{height:41px;}
+	.main_list{list-style: none; height: 38px;width:980px;margin:0 auto;border-bottom: #665656 2px solid;}
+	.main_list li{float:left;line-height:38px;padding:0 20px;cursor:pointer;font-size:16px;font-weight:bold;}
+	.main_list li:hover{border-bottom:2px solid #c9483c;}
+	.main_list li.fr{float:right;padding:0;/*border: 0;*/margin-right:28px;}
+	.main_list li a{margin-right:4px;}
+	.main_list li a.r1{background:url(images/phone.png) no-repeat;height:18px;width:16px;display: block;float: left;margin-top:10px;}
+	.main_list li a.r2{background:url(images/money.png) no-repeat;height:18px;width:19px;display: block;float: left;margin-top:10px;}
+	.main_list li a.r3{background:url(images/pan.png) no-repeat;height:19px;width:19px;display: block;float: left;margin-top:10px;}
+	/*headerbottom结束*/
+	
+	/*banner开始*/
+	.banner_box{margin:0;padding:0;}
+	.banner{width:980px;height:380px;margin:0 auto;margin-top:20px;}
+	
+	.menu{width: 236px;position:relative;border: #e0dcd7 solid 2px;float:left;z-index: 9}	
+	.menu a{text-decoration:none;color:#655;font-size:12px;}
+	a.hot{color:#C9483C}
+	.menu a:hover{color:#c9483c;}
+	.menu .category{position:relative;border-bottom: 1px solid #e0dcd7;}/*四行中的一行*/
+	.category p{color:#655;}
+	.category p span{word-spacing:4px;/*空格宽度*/font-size:9pt;/*竖线高度*/} 
+	.category .sub{padding: 0 0 11px;/*position:relative;*/}/*显示栏目*/
+	.sub p{height:24px;line-height: 24px;padding:0 18px;text-align: center;}
+	.category:hover .more{display:block;/*transition:display 2s;*/}
+	.category:hover h3 span{display:none;}
+	
+	.category .more{position: absolute;width:210px;height:57px;top: -2px;left: 236px;border:#e0dcd7 solid 2px;border-left:0;padding-left:24px;padding-top:36px;display: none; background: #FFF/*transition:display 2s;*/}/*隐藏栏目*/
+	.category .more4{width:466px;height:58px;}
+	.more4 div{float:left}
+	.more4_text{margin-left:40px;}
+	
+	
+	.sub h3{font-size:16px;position: relative;height:20px;line-height:20px;padding: 12px 20px 2px;color:#4c4c4c;font-weight: bold;} /*标题*/
+	h3 span{background: url(images/icon.png) no-repeat 0 -174px;width:4px;height:9px;display: block;position:absolute;top:15px;right:21px;}/*箭头*/
+	
+	.banner_pic{float:right;width:720px;height:380px;position:relative;}
+	.banner_pic img{width:720px;height:380px}
+	.banner_pic li{display: none;}
+	.tabLeft{position:absolute;display: block;height:63px;width:37px; background: url(images/tab.png) no-repeat ; top:155px;left:16px;cursor: pointer;}
+	.tabRight{position:absolute;display: block;height:63px;width:37px; background: url(images/tab.png) no-repeat 0 -126px;; top:155px;right:16px;cursor: pointer;}
+	.banner_pic a.tabLeft,.banner_pic a.tabRight{display: none;}
+	.banner_pic:hover a.tabLeft,.banner_pic:hover a.tabRight{display: block;}
+	.banner_pic a.tabLeft:hover{background:url(images/tab.png) no-repeat 0 -63px;}
+	.banner_pic a.tabRight:hover{background:url(images/tab.png) no-repeat 0 -189px;}
+	
+	span.pointer{right:19px;position: absolute;bottom:4px;}/*4个圆点位置*/
+	.pointer a{text-decoration:none;font-size:31px;color:#FFFFFF;padding-left:4px;cursor:pointer;}
+	.pointer a.active{color:#f7311f;font-size:31px;}
+	/*banner结束*/
+	
+	
+		/*recommend开始*/
+	.recommend_box{}
+	.recommend{width:980px;height:238px;margin:0 auto;}
+	.recommend .title{position:relative;width:980px;margin:0 auto;height:56px;}
+	.recommend  h3{position:absolute;bottom:0;font-size:18px;color:#000;font-weight: normal;}
+	.recommend  span.rec_link{position: absolute;bottom:0;left:92px;}
+	.rec_link a{text-decoration: none;color: #655;font-size:14px;}
+	.rec_link a.active{color:#c9483c}
+	.rec_link span{color: #655;font-size:9pt;word-spacing:4px;}
+	a.hot2{color:#c9483c;}
+	
+	.contents{width:978px;height:200px;border:#ebe6e1 solid 1px;margin-top:20px;}
+	.contents ul{list-style:none;margin:0px;height:180px;display: none;}
+	.contents li{float:left;width:325px;height:160px;border-right:1px solid #ebe6e1;padding:20px 0;position:relative;}
+	.contents li:hover{background: #f5f5f5}
+	.contents li div{}
+	.contents a{text-decoration:none;}
+	a.pic{float:left;}
+	a.pic img{box-shadow: 1px 1px 3px #aaa;margin-left: 20px;}
+	
+	.introduce{float: right;margin-right:18px;}
+	.introduce p{color:#888;font-size:12px;width:159px;letter-spacing: 1px;white-space: normal;line-height: 18px;}
+	.introduce p.name{line-height: 35px; display:block}
+	.introduce a{color:#888;font-size:12px;}
+	.introduce a.book_title{font-size:16px;font-weight: bold;line-height:22px;display: block;margin:0px;padding:0;color: #4c4c4c;}
+	.introduce a.book_title:hover{color:#c9483c;}
+	
+	.introduce a.read{font-weight:bold;color:#655;position:absolute;bottom:20px;text-decoration: none;} 
+	.introduce a.read:hover{color:#c9483c;}
+	a.read i{margin-left:3px;background:url(images/jiantou.png) no-repeat;display: inline-block;width:4px;height:7px;position:relative;*top:-5px;}
+	a.read:hover i{background:url(images/red_jiantou.png) no-repeat;}
+	/*.contents a:hover{color:#c9483c;}*/
+		/*recommend结束*/
+	
+	/*part开始*/
+	.part{width:980px;margin:0 auto; padding-top:40px;}
+	
+	.left{float:left;width: 700px;}
+	.left .title{width:700px;*padding-bottom:18px; }
+	.part .title h2{font-size:18px;line-height:18px;font-weight:normal;display: block;color: #000;float:left;margin-bottom:18px}
+	.left .title a.more:link,.left .title a.more:visited{text-decoration:none;font-size:13px;color:#888;float: right;padding-top:2px;}
+	.left .title a.more:hover{color:#c9483c;}
+	.left .fourbook{width:698px;height:400px;border:#ebe6e1 solid 1px;}
+	.left ul{list-style: none;height:400px;}
+	.left ul li.four{float:left;}
+	.left ul li.four .one{width:348px;height:198px;}
+	.one a{float:left;}
+	.one a img{box-shadow:1px 1px 3px #aaa;margin-left: 20px;margin-top:20px;}
+	.one:hover{background:#f5f5f5 }
+	.one .introduce{position:relative;float: right;margin-right:18px;margin-top:20px;height:179px;}
+	.one .introduce p{width:180px;}
+	.left ul li.four div.border1{border-bottom:#ebe6e1 solid 1px;border-right:#ebe6e1 solid 1px;}
+	.left ul li.four div.border2{border-bottom:#ebe6e1 solid 1px;width:349px;}
+	.left ul li.four div.border3{height:201px; }
+	.left ul li.four div.border4{border-left:#ebe6e1 solid 1px;height:201px;width:349px;}
+	
+	.right{float:right;width:260px;}
+	
+	.ranking{height:400px;border: 1px solid #ebe6e1;}
+	.RankingList{list-style: none;overflow: hidden;}
+	.RankingList li p{display: block;height:40px;width:260px;}
+	.style2{display: none;}
+	.RankingList li{border-top: 1px solid #ebe6e1;padding-left:22px}
+	.RankingList li.bl .style2{display: block;height:124px; width:236px;padding-top:20px;}
+	.RankingList li.bl p{display:none;}
+	
+	ul.RankingList li.bl:hover{background: #f5f5f5}
+	ul.RankingList li.bl .style2 .number{float:left;}
+	ul.RankingList li.bl .style2 img{float:left;}
+	ul.RankingList li.bl .style2 h3{font-size:16px;}
+	ul.RankingList li.bl .style2 span.name{font-size:12px;color:#888;padding-left: 14px;}
+	ul div.ranking_more{height:40px;width:260px; padding-left:24px;}
+	/*..................................................................................................*/
+	ul div.ranking_more a.chakan{float:left; font-size: 14px;color:#665555;padding-top:10px;}
+	ul li.bl .style2 .book_title2{font-size: 16px;font-weight: bold;color:#4c4c4c;position: relative; top: -3px;padding-left: 14px; }
+	ul li.bl .style2 .book_title2:hover{color:#c9483c;}
+	
+	.right ul li a:link,.right ul li a:visited{color:#665555}
+	.right ul li a:hover{color: #c9483c;}
+	span.number{color:#aaaaaa;margin-right:14px;font-family: arial;}
+	span.icon{background: url(images/right_icon.png) no-repeat;width:10px;height:9px;display:block;float:left; margin:17px 20px 0 4px; }
+	.right li span{cursor:pointer;}
+	
+	.right .hot3{color:#c9483c; font-size:18px; font-family: arial;}
+	.right .title{width:260px; *padding-bottom:18px;}
+	
+	 /*修改部分开始*/
+	.hidden{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+	.ranking2{height:530px;}
+	
+	.ranking2 ul li{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width:218px; padding-right:18px}
+	.left2{height:530px}
+	.left2 ul{height:520px;border:#ebe6e1 solid 1px;padding:0 9px;padding-top:10px;}
+	.left2 li{height:255px;width:136px;float:left;pading-top:0}
+	.left2 li:hover{background:#f5f5f5;}
+	.10pic{height:530px;width:698px;border:#ebe6e1 solid 1px;}
+	.left2 .10pic div.10_1{width:114px;margin:0 11px;}
+	.name2{font-size:12px;color:#888;width:114px;margin-top:6px}
+	ul li.bl .style2 .book_title3{font-size: 16px;font-weight: bold;line-height: 22px;display: block;margin-top:6px;padding: 0; color:#4c4c4c;width:114px;}
+	ul li.bl .style2 .book_title3:hover{color: #c9483c;cursor:pointer;}
+	
+		/*修改部分结束*/
+	/*part结束*/
+	
+		 /*articles开始*/
+	 .articles{width:980px;margin:0 auto;}
+	 .articles .title{width:980px;margin-top:40px;-padding-bottom:18px}
+	 .articles .title h2{font-size:18px;line-height:18px;font-weight:normal;display: block;color: #000;float:left;margin-bottom:18px;}
+	 .articles .title a:link,.articles  .title a:visited{text-decoration:none;font-size:13px;color:#888;float: right;padding-top:2px;}
+	 .articles .title a.more:hover{ color:#c9483c;}
+	 .articles .content{width:980px;height:363px;border:1px solid #ebe6e1}
+	 .articles .content ul{list-style:none;width:980px;}
+	 .articles .content li{width:306px;border-right:1px solid #ebe6e1;height:343px;float:left;padding-left:20px; padding-top:20px;}
+	  .articles .content .li3{border:0;padding:0;}
+	  .articles .content .li3:hover{ background:#FFF}
+	  .articles .content .side{ margin:0; padding:0;width:100%;}
+	 .articles .content .side li{float:none;height:54px; border-bottom:1px solid #ebe6e1; padding:0;position:relative;width:300px;padding-left:26px; padding-top:18px; overflow-x:hidden}
+	 .articles .content .side li span{font-size:14px; color:#888;}
+	 .articles .content .side .li5{height:53px;border:0;}
+	 .articles li:hover,.articles .content .side li:hover{ background:#f5f5f5;}
+	 .articles h3{ width:285px; word-break:break-word;font-size:16px; font-weight:bold; color:#4c4c4c; margin:12px 0 3px;height:22px; cursor:pointer;}
+	 .articles .content ul li p{line-height:18px; cursor:pointer;color:#888;font-size:12px;}
+	 .articles .content ul li p a:link,.articles .content ul li p a:visited{color:#655;font-size:14px;line-height:14px;}
+	 .articles .content ul li p a:hover{color:#c9483c;}
+	
+	 
+	 .articles .content ul li p.desc{ height:54px; margin:6px 0 10px;}
+	 .zan{ background:url(images/icon.png) no-repeat 0 -10px; display:inline-block;height:12px;width:12px;}
+	 .share{ background:url(images/icon.png) no-repeat -15px -10px; display:inline-block;height:12px;width:14px; margin-left:10px;}
+	 .zan_num{font-weight:normal;}
+	 
+	 .side i{ background:url(images/icon.png) no-repeat -40px -10px;width:2px; height:10px;position:absolute;top:19px; left:19px;}
+	 /*articles结束*/
+	 
+	 /*about开始*/
+	 .about{width:980px;margin:0 auto;}
+	 .about .title{margin-top:40px}
+	 .about h2{font-size:18px;line-height:18px;font-weight:normal;display: block;color: #000;float:left;margin-bottom:18px;}
+	 .about .content{width:978px;height:197px; border:1px solid #ebe6e1;}
+	 .about .content ul{ list-style:none;}
+	 .about .content ul li{display:block;float:left; width:243px; height:197px;border-right:1px solid #ebe6e1; position:relative;}
+	 .about .content ul li:hover{background:#f5f5f5;}
+	 .about .content ul li p span{float:left;color:#888;line-height:20px; font-size:12px;}
+	 .about .content ul li p a{margin-left:5px; margin-top:3px;}
+	  .about .content ul li p{margin-left:67px; }
+	   .about .content ul li .bottom{display:block;height:22px; width:74px;color:#c9483c; border:1px solid #c9483c; border-radius:5px;font-size:12px;line-height:22px; text-align:center; left:67px; bottom:20px; cursor:pointer;position:absolute}
+	 
+	 .about .icon1{ background:url(images/icon.png) no-repeat 0 -25px; display:block; height:36px;width:36px;margin-top:20px; margin-left:16px;float:left;margin-right:15px;}
+	 .about .icon2{background:url(images/icon.png) no-repeat -36px -25px; display:block; height:36px;width:36px;margin-top:20px; margin-left:16px;float:left;margin-right:15px;}
+	 .about .icon3{background:url(images/icon.png) no-repeat 0 -61px; display:block; height:36px;width:36px;margin-top:20px; margin-left:16px;float:left;margin-right:15px;}
+	 .about .icon4{background:url(images/icon.png) no-repeat -36px -61px; display:block; height:36px;width:36px;margin-top:20px; margin-left:16px;float:left;margin-right:15px;}
+	 .about h3{ color:#4c4c4c; font-size:16px; font-weight:bold;margin-top:20px; height:24px;}
+	 .about h6{ font-size:12px; font-weight:normal; margin-bottom:4px; height:18px;line-height:18px;color:#655;}
+	 a.wx_icon{ background: url(images/icon.png) no-repeat -26px -130px;display:block; float:left; width:19px; height:16px;}
+	 a.xl_icon{background: url(images/icon.png) no-repeat 0 -130px;display:block; float:left; width:19px; height:16px;}
+	 a.yx_icon{background: url(images/icon.png) no-repeat -51px -130px;display:block; float:left; width:19px; height:16px;}
+	 a.wx_icon:hover{background: url(images/icon.png) no-repeat -26px -149px;}
+	 a.xl_icon:hover{background: url(images/icon.png) no-repeat 0 -150px;}
+	 a.yx_icon:hover{background: url(images/icon.png) no-repeat -51px -149px;}
+	 /*about结束*/
+	 
+	  /*footer开始*/
+	  .footer_box{width:100%; border-top:#eee solid 1px; background:#fafafa;margin-top:79px;height:237px;}
+	  .footer{width:980px; margin:0 auto; padding:38px 0 55px;}
+	  .footer ul{ list-style:none;}
+	  .footer ul li{float:left;display:block;width:115px;padding:0 23px 0 33px;; border-right:1px solid #eee}
+	   .footer ul li:nth-child(1){padding-left:0;}
+	   .footer ul li:nth-child(6){padding-right:0; border:0;}
+	  .footer ul li p{ line-height:30px;}
+	  .footer ul li a{ margin:0 5px 0 0; font-size:12px; color:#888}
+	   .footer ul li a i{ display:inline-block; background:url(images/icon.png) no-repeat -30px -10px; width:9px; height:9px; margin-left:3px; *height:13px;}
+	  .footer ul li a:hover{color:#c9483c;}
+	  .footer h3{ color:#655; font-size:16px; font-weight:normal;}
+	  /*footer结束*/
+	  
+	   /*f_bottom开始*/
+	  .f_bottom_box{width:100%; border-top:#eee solid 1px; background:#fafafa;height:161px;}
+	  .f_bottom{width:980px; margin:0 auto; font-size:12px;color:#888; padding: 40px 0 50px;}
+	  .f_bottom p{ text-align:center; margin-bottom:15px;}
+	  .f_bottom a{color:#888;}
+	  .f_bottom a:hover{color: #c9483c;}
+	 .f_bottom .sep{word-spacing:4px; color:#ccc;line-height:17px;}
+	  .f_bottom a.wx{ background:url(images/icon2.png) no-repeat -17px -39px; display:block; float:left; width:16px; height:16px; margin:0 8px 0 8px;}
+	  .f_bottom a.wx:hover{background:url(images/icon2.png) no-repeat -17px -58px;}
+	  
+	   .f_bottom a.yx{background:url(images/icon2.png) no-repeat -49px -38px; display:block; float:left; width:16px; height:16px; margin:0 8px 0 0;}
+	   .f_bottom a.yx:hover{background:url(images/icon2.png) no-repeat -49px -58px;}
+	   
+	    .f_bottom a.xl{background:url(images/icon2.png) no-repeat 0 -39px; display:block; float:left; width:16px; height:16px; margin:0 8px 0 0;}
+		.f_bottom a.xl:hover{background:url(images/icon2.png) no-repeat 0 -59px;}
+		
+		 .f_bottom a.qq{background:url(images/icon2.png) no-repeat -33px -39px; display:block; float:left; width:16px; height:16px; margin:0 8px 0 0;}
+		 .f_bottom a.qq:hover{background:url(images/icon2.png) no-repeat -33px -60px;}
+		 .center{ width:153px; margin:0 auto;}
+	  /*f_bottom结束*/
+	a{text-decoration:none;}
+	.part2{*margin-top:40px}
+	
+	#FloatNav{width:100%;height:50px;background: #66CCCC;position: absolute;top:-50px;left:0;z-index:10;text-align: center;line-height:50px;}
+	#RankingList3 
+	.ranking2{height:520px;}
+</style>
+
+</head>
+
+<body>
+	<div class="nav_box">
+		<div class="nav">
+			<div class="nav_left">
+				<a href="#">网易云阅读</a><span> | </span>
+				<a href="#">国风中文网</a><span> | </span>
+				<a href="#">采薇书院</a><span> | </span>
+				<a href="#">从电脑上导入书籍</a><span> | </span>
+				<a href="#" class="code">公众号<img src="images/ewm.png" alt=""/></a><span> | </span>
+				<a href="#">渠道推广平台</a>
+			</div>
+			<div class="nav_right">
+					<div  class="login">
+					<a href="#" class="text1">登录</a>
+					<!--<div class="clear"></div>-->
+					<div class="login_list">
+						<ul>
+							<li class="wy">
+								<a href="#">
+									<span class="tiny_logo"></span>
+									<span>网易邮箱登录</span>
+								</a>
+							</li>
+							<li class="xl">
+								<a href="#">
+									<span class="xl_logo"></span>
+									<span>新浪微博登录</span>
+								</a>
+							</li>
+							<li class="tx">
+								<a href="#">
+									<span class="tx_logo"></span>
+									<span>腾讯微博登录</span>
+								</a>
+							</li>
+							<li class="phone">
+								<a href="#">
+									<span class="phone_logo"></span>
+									<span>手机号登录</span>
+								</a>
+							</li>
+							<li class="wx" style="border: 0;">
+								<a href="#" >
+									<span class="wx_logo"></span>
+									<span>微信登录</span>
+								</a>
+							</li>
+						</ul>	
+					</div>
+			  </div><span> | </span>
+				<a href="#">注册</a><span> | </span>
+				<a href="#">举报</a>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>	
+	<div class="headertop">
+		<div class="inner">
+			<h1 class="logo">
+				<a href="#"></a>
+			</h1>
+			<div class="sch">
+			
+				<input type="text" placeholder="北京，北京" onfocus="this.placeholder=''" onblur="this.placeholder='北京，北京'" class="input">
+				<input type="button" class="button">
+			</div>
+			<div class="cloud">
+				<a href="#" class="subscribe">我的订阅</a>
+				<a href="#" class="bookcase">我的书架</a>
+			</div>
+			
+		</div>	
+		
+	</div>	
+	<div class="clear"></div>
+	<div class="headerbottom">
+		<ul class="main_list">
+			<li style="border-bottom: 2px solid #c9483c;color:#c9483c">首页</li>
+			<li>出版图书</li>
+			<li>国风中文网</li>
+			<li>采薇书院</li>
+			<li>漫画</li>
+			<li>订阅</li>
+			<li>排行榜</li>
+			<li class="fr" style="margin-right:0px;"><a class="r1"></a>客户端</li>
+			<li class="fr"><a class="r2"></a>充值</li>
+			<li class="fr" ><a class="r3"></a>作者中心</li>
+		</ul>
+	</div>	
+	<div class="clear"></div>	
+	<div class="banner_box">
+		<div class="banner">  
+			<div class="menu">
+				<div class="category">
+					<div class="sub">
+						<h3>国风中文网<span><!--箭头--></span> 
+						</h3>
+						<p>
+							<a href="#" class="hot">都市生活</a><span> | </span>
+							<a href="#" class="hot">官场职场</a><span> | </span>
+							<a href="#">玄幻仙侠</a>
+						</p>
+						<p>
+							<a href="#" >悬疑探险</a><span> | </span>
+							<a href="#" >灵异恐怖</a><span> | </span>
+							<a href="#">短篇小说</a>
+						</p>
+					</div>
+					<div class="more">
+						<p>
+							<a href="#">科幻奇幻</a><span> | </span>
+							<a href="#">军事谍战</a><span> | </span>
+							<a href="#">同人网游</a>
+						</p>
+							<a href="#">历史传奇</a>
+						
+					</div>
+				</div>
+				
+				<div class="category">  
+					<div class="sub">
+						<h3>采薇书院<span><!--箭头--></span> 
+						</h3>
+						<p>
+							<a href="#" >浪漫青春</a><span> | </span>
+							<a href="#" class="hot">都市言情</a><span> | </span>
+							<a href="#">古风古韵</a>
+						</p>
+						<p>
+							<a href="#" class="hot">穿越架空</a><span> | </span>
+							<a href="#" >宫斗宅斗</a><span> | </span>
+							<a href="#">种田重生</a>
+						</p>
+					</div>
+					<div class="more">
+						<p>
+							<a href="#">短篇美文</a><span> | </span>
+							<a href="#">仙侠幻情</a><span> | </span>
+							<a href="#">灵异推理</a>
+						</p>
+							<a href="#">同人网游</a>
+						
+					</div>
+				</div>
+				
+				<div class="category">
+					<div class="sub"> 
+						<h3>图书<span><!--箭头--></span> 
+						</h3>
+						<p>
+							<a href="#" class="hot">小说作品</a><span> | </span>
+							<a href="#" class="hot">人文社科</a><span> | </span>
+							<a href="#">成功励志</a>
+						</p>
+						<p>
+							<a href="#" >经济管理</a><span> | </span>
+							<a href="#" >品质生活</a><span> | </span>
+							<a href="#">计算机&nbsp;&nbsp;&nbsp;</a>
+						</p>
+					</div>
+					<div class="more">
+						<p>
+							<a href="#">文学作品</a><span> | </span>
+							<a href="#">两性情感</a><span> | </span>
+							<a href="#">亲子少儿</a>
+						</p>
+						<p>
+							<a href="#">培训考试</a><span> | </span>
+							<a href="#">杂志期刊</a><span> | </span>
+							<a href="#">外文外版</a>
+						</p>
+					</div>
+				</div>
+				
+				<div class="category" style="border-bottom:0;padding-bottom: 1px;">
+					<div class="sub">
+						<h3>订阅<span><!--箭头--></span> 
+						</h3>
+						<p>
+							<a href="#" >创意频道</a><span> | </span>
+							<a href="#" >美食频道</a><span> | </span>
+							<a href="#">公开课堂</a>
+						</p>
+						<p>
+							<a href="#" >视觉频道</a><span> | </span>
+							<a href="#" >外文资讯</a><span> | </span>
+							<a href="#">自媒体人</a>
+						</p>
+					</div>
+					<div class="more more4">
+						<div>
+							<p>
+								<a href="#">报刊</a><span> | </span>
+								<a href="#">娱乐</a><span> | </span>
+								<a href="#">新闻</a><span> | </span>
+								<a href="#">财经</a><span> | </span>
+								<a href="#">科技</a>
+							</p>
+							<p>
+								
+								<a href="#">生活</a><span> | </span>
+								<a href="#">人文</a><span> | </span>
+								<a href="#">时尚</a><span> | </span>
+								<a href="#">家居</a><span> | </span>
+								<a href="#">文史</a>
+							</p>
+						</div>
+						<div class="more4_text">
+							<p>
+								<a href="#">旅游</a><span> | </span>
+								<a href="#">新闻</a><span> | </span>
+								<a href="#">游戏</a><span> | </span>
+								<a href="#">星座</a><span> | </span>
+								<a href="#">体育</a>
+							</p>
+							<p style="white-space:nowrap">
+								
+								
+								<a href="#">灵异</a><span> | </span>
+								<a href="#">名人博客</a><span> | </span>
+								<a href="#">本地资讯</a><span> | </span>
+								<a href="#" >云课堂</a>
+							</p>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="banner_pic" id="banner_pic">
+			
+				<li style="display: block;"><img src="images/banner1.jpg"/></li>
+				<li><img src="images/banner2.jpg"/></li>
+				<li><img src="images/banner3.jpg"/></li>
+				<li><img src="images/banner4.jpg"/></li>
+				
+			
+				<a class="tabLeft" id="left"></a>
+				<a class="tabRight" id="right"></a>
+				<span class="pointer" id="dot">
+					<a>•</a><a>•</a><a>•</a><a>•</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="recommend_box">
+		<div class="recommend">
+			<div class="title">
+				<h3>主编推荐</h3>
+				<span class="rec_link" id="rec_link">
+					<a href="#" class="hot2">小说</a><span> | </span>
+					<a href="#" >图书</a><span> | </span>
+					<a href="#" >订阅</a>
+				</span>
+			</div>
+			<div class="contents" id="contents">
+				<ul>
+					<li>
+						<div>
+							<a href="#"  class="pic"><img src="images/8796093023009207199.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:65px;">雄霸三国</a>
+							  <p class="name">孤君道</p>
+								<p>如果告诉你王允与董卓是同谋，你会信么？如果告诉你董卓火烧雒阳得到朝廷支持，你会相信么？</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023472815286.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:80px;">罪恶调查局</a>
+							  <p  class="name">骁骑校</p>
+								<p>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li style="border:0;">
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023312517165.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:115px;">天才妖妃不好惹</a>
+							  <p  class="name">七月悠然</p>
+								<p>她天生眼盲，双亲被害！苟活于世，竟沦为祭祀之品！一朝觉醒，强势回归！</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div>
+							<a href="#"  class="pic"><img src="images/8796093023457287875.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:65px;">雄霸三国</a>
+							  <p class="name">孤君道</p>
+								<p>如果告诉你王允与董卓是同谋，你会信么？如果告诉你董卓火烧雒阳得到朝廷支持，你会相信么？</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023070749890.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:80px;">hahahahahhah</a>
+							  <p  class="name">骁骑校</p>
+								<p>毛hahahahahahah调查局的全部</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li style="border:0;">
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023312517165.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:115px;">hahahahaha惹</a>
+							  <p  class="name">七月悠然</p>
+								<p>她天生眼hahahahahaaha品！一朝觉醒，强势回归！</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div>
+							<a href="#"  class="pic"><img src="images/8796093023470097465.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:65px;">xixixixixixix</a>
+							  <p class="name">孤君道</p>
+								<p>如果告诉你xixixixixixxix朝廷支持，你会相信么？</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023457287875.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:80px;">xixixixix</a>
+							  <p  class="name">骁骑校</p>
+								<p>毛头小子，混血少xxixixixix查局的全部</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li style="border:0;">
+						<div>
+							<a href="#" class="pic"><img src="images/8796093023312517165.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:115px;">xixixixixixi好惹</a>
+							  <p  class="name">七月悠然</p>
+								<p>她天生眼盲，双亲被xixixixixixix觉醒，强势回归！</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			
+			
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>	
+	<div class="part part2">
+		<div class="left">
+			<div class="title">
+				<h2>国风中文网</h2>
+				<a href="#" class="more">更多></a>
+			</div>
+			<div class="clear"></div>
+			<div class="fourbook">
+				<ul>
+					<li class="four">
+						<div class="one border1">
+							<a href="#"><img src="images/8796093023122163050.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+                            	
+								<p><a href="#" class="book_title" >冒牌大保镖</a></p>
+                                <div class="clear"></div>
+							  	<p class="name">李非鱼</p>
+								<p>他是国术大师，更是不懂泡妞的泡妞高手！</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="four ">
+						<div class="one border2" >
+							<a href="#"><img src="images/7806616120093595229.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title"">义匪三十年</a><div class="clear"></div>
+							  	<p class="name">鲁狂歌</p>
+								<p>自清末至民国，从关内到关外，义匪李铭九三十年传奇生涯……</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="four">
+						<div class="one border3" >
+							<a href="#"><img src="images/8796093023069559158.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" >无罪谋杀</a><div class="clear"></div>
+							  	<p class="name">宇尘</p>
+								<p>最骇人听闻的谋杀，最匪夷所思的真相！</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="four">
+						<div class="one border4">
+							<a href="#"><img src="images/8796093022827438546.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title">纨绔神医</a><div class="clear"></div>
+							  	<p class="name">七辛海棠</p>
+								<p>小伙凭借一身医术，妖孽人生至此开启</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<h2>国风中文网畅销榜</h2>
+			</div>
+			<div class="clear"></div>
+			<div class="ranking">	
+					<ul id="RankingList" class="RankingList">
+					<li class="bl" style="border-top:0;">
+						<div class="style2" >
+							<span class="number hot3">01</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+							
+						</div>
+						
+						<p>
+							<span class="number">01</span>
+							<a href="#">官梯</a>
+						</p>
+					</li>
+					<div class="clear"></div>
+					<li>
+						<div  class="style2">
+							<span class="number hot3">02</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">02</span>
+						<a href="#">官神</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">03</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">03</span>
+						<a href="#">超级特卫传奇</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">04</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">04</span>
+						<a href="#">通天仕途</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">05</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">05</span>
+						<a href="#">青云记</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">06</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">06</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<div class="ranking_more">
+						<span class="icon"></span>
+						<a href="#" class="chakan">查看更多</a>
+					</div>
+				</ul>
+			
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="part">
+		<div class="left">
+			<div class="title">
+				<h2>采薇书院</h2>
+				<a href="#" class="more">更多></a>
+			</div>
+			<div class="clear"></div>
+			<div class="fourbook">
+				<ul>
+					<li class="four">
+						<div class="one border1" >
+							<a href="#"><img src="images/8796093023393571970.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:145px;">嫡女重生：步步为凰</a><div class="clear"></div>
+						  	  <p class="name">霓裳佳人</p>
+								<p>前世的她被污为祸国毒妇抛尸荒野而死。一朝重生，斗姨娘庶妹，让负心汉生不如死。</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+						  </div>
+					  </div>
+					</li>
+					<li class="four ">
+						<div class="one border2" >
+							<a href="#"><img src="images/8796093022759402355.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:160px;">美人如玉：绝佳大小姐</a><div class="clear"></div>
+						  	  <p class="name">米倪儿</p>
+								<p>是缘分？还是命中注定？她与两个痴情男人的爱情，又一次纠缠在一起。</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+						  </div>
+					  </div>
+					</li>
+					<li class="four">
+						<div class="one border3" >
+							<a href="#"><img src="images/8796093023069550837.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:170px;">情陷于诺，总裁的兼职太太</a><div class="clear"></div>
+						  	  <p class="name">柳乘风</p>
+								<p>女老板缺钱,大总裁缺爱，两人签下为期三个月的结婚协议，都报着谈钱不谈感情的信心。</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+						  </div>
+					  </div>
+					</li>
+					<li class="four">
+						<div class="one border4">
+							<a href="#"><img src="images/8796093023224013906.jpg" width="114" height="160" alt=""/></a>
+							<div class="introduce">
+								<a href="#" class="book_title" style="width:160px;">暖婚新妻，老公深深爱</a><div class="clear"></div>
+						  	  <p class="name">安暖暖</p>
+								<p>他居然告她非礼！乔子悦对带了几十个保镖过来要她负责的男人，忽然觉得不想活了。</p>
+								<a href="#" class="read">立即阅读<i></i>
+								</a>
+						  </div>
+					  </div>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<h2>国风中文网畅销榜</h2>
+			</div>
+			<div class="clear"></div>
+			<div class="ranking">	
+					<ul id="RankingList4" class="RankingList">
+					<li class="bl" style="border-top:0;">
+						<div class="style2" >
+							<span class="number hot3">01</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+							
+						</div>
+						
+						<p>
+							<span class="number">01</span>
+							<a href="#">官梯</a>
+						</p>
+					</li>
+					<div class="clear"></div>
+					<li>
+						<div  class="style2">
+							<span class="number hot3">02</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">02</span>
+						<a href="#">官神</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">03</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">03</span>
+						<a href="#">超级特卫传奇</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">04</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">04</span>
+						<a href="#">通天仕途</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">05</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">05</span>
+						<a href="#">青云记</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">06</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">06</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<div class="ranking_more">
+						<span class="icon"></span>
+						<a href="#" class="chakan">查看更多</a>
+					</div>
+				</ul>
+			
+			</div>
+		</div>
+	</div>
+    <div class="clear"></div>
+    <div class="part">
+		<div class="left left2">
+			<div class="title">
+				<h2>精品图书</h2>
+				<a href="#" class="more">更多></a>
+			</div>
+			<div class="clear"></div>
+			<div class="10pic">
+				<ul>
+					<li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023482459537.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">我杀了他</p>
+							<p class="name2">【日】东野圭吾</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023473146345.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">阴阳师：泷夜叉姬</p>
+							<p class="name2">【日】梦枕貘</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023473002284.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">胭脂扣</p>
+							<p class="name2">李碧华</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023459111582.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">岛</p>
+							<p class="name2">【英】维多利亚·希斯</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023475594021.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">未来三十年</p>
+							<p class="name2">郑永年</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023446695500.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">鸫</p>
+							<p class="name2">【日】吉本芭娜娜</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023475636857.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">咖啡未冷前</p>
+							<p class="name2">【日】川口俊和</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023459094940.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">冬牧场</p>
+							<p class="name2">李娟</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023476049275.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">北京，北京（周冬雨、张一山主</p>
+							<p class="name2">冯唐</p>				
+					  	</div>
+					</li>
+                    <li class="">
+						<div class="10_1" style="margin:0 11px;padding-top:10px;">
+							<a href="#"><img src="images/8796093023482339256.jpg" width="114" height="160" alt=""/></a>
+								<p class="book_title3">维罗妮卡决定去死</p>
+							<p class="name2">【巴西】保罗·柯艾略</p>				
+					  	</div>
+					</li>
+                    
+
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<h2>国风中文网畅销榜</h2>
+			</div>
+			<div class="clear"></div>
+			<div class="ranking ranking2">	
+					<ul id="RankingList2" class="RankingList">
+					<li class="bl" style="border-top:0;">
+						<div class="style2" >
+							<span class="number hot3">01</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+							
+						</div>
+						
+						<p>
+							<span class="number">01</span>
+							<a href="#">官梯</a>
+						</p>
+					</li>
+					<div class="clear"></div>
+					<li>
+						<div  class="style2">
+							<span class="number hot3">02</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">02</span>
+						<a href="#">官神</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">03</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">03</span>
+						<a href="#">超级特卫传奇</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">04</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">04</span>
+						<a href="#">通天仕途</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">05</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">05</span>
+						<a href="#">青云记</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">06</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">06</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">07</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">07</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">08</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">08</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">09</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">09</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<div class="ranking_more">
+						<span class="icon"></span>
+						<a href="#" class="chakan">查看更多</a>
+					</div>
+				</ul>
+			
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+    
+    <div class="part part3">
+            <div class="left left2">
+                <div class="title">
+                    <h2>优秀漫画</h2>
+                    <a href="#" class="more">更多></a>
+                </div>
+                <div class="clear"></div>
+                <div class="10pic">
+                    <ul>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023482459537.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">恋爱大神求放过</p>
+                                <p class="name2">站在心尖上的那人</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023473146345.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">中国诡实录</p>
+                                <span class="name2" style="width:240px;word-wrap:break-word;">身边真实的诡异事件</span>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023473002284.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">战国武校</p>
+                                <p class="name2">放眼皆是武斗美少女</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023459111582.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">厄运之王</p>
+                                <p class="name2">被厄运缠身的故事</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023475594021.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">撩妹联盟</p>
+                                <p class="name2">一大波妹子等你来撩</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023446695500.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">嗜谎之神</p>
+                                <p class="name2">拯救迷途的羔羊</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023475636857.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">苍蓝之争</p>
+                                <p class="name2">王权争夺</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023459094940.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">我才不会被女孩子欺负呢</p>
+                                <p class="name2">小时候揍我长大泡我</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023476049275.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">王爷不好婚</p>
+                                <p class="name2">王爷不能好好结婚…</p>				
+                            </div>
+                        </li>
+                        <li class="">
+                            <div class="10_1" style="margin:0 11px;padding-top:10px;">
+                                <a href="#"><img src="images/8796093023482339256.jpg" width="114" height="160" alt=""/></a>
+                                    <p class="book_title3">诡异奇谈</p>
+                                <p class="name2">割下的肉是自己的？</p>				
+                            </div>
+                        </li>
+                        
+    
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="right">
+			<div class="title">
+				<h2>国风中文网畅销榜</h2>
+			</div>
+			<div class="clear"></div>
+			<div class="ranking ranking2">	
+					<ul id="RankingList3" class="RankingList">
+					<li class="bl" style="border-top:0;">
+						<div class="style2" >
+							<span class="number hot3">01</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>							
+						</div>
+						
+						<p>
+							<span class="number">01</span>
+							<a href="#">官梯</a>
+						</p>
+					</li>
+					<div class="clear"></div>
+					<li>
+						<div  class="style2">
+							<span class="number hot3">02</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">02</span>
+						<a href="#">官神</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">03</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">03</span>
+						<a href="#">超级特卫传奇</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">04</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">04</span>
+						<a href="#">通天仕途</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">05</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">05</span>
+						<a href="#">青云记</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">06</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">06</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">07</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">07</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">08</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">08</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<li>
+						<div class="style2">
+							<span class="number hot3">09</span>
+							<a href="#"><img src="images/guanti.jpg" width="74" height="104" alt=""/></a>
+							<h3><a href="#" class="book_title2">官梯</a></h3>
+							<span class="name" style="font-size:12px;color: #888">钓人的鱼</span>
+						</div>
+						<p>
+						<span class="number">09</span>
+						<a href="#">绝世高手</a>
+						</p>
+					</li><div class="clear"></div>
+					<div class="ranking_more">
+						<span class="icon"></span>
+						<a href="#" class="chakan">查看更多</a>
+					</div>
+				</ul>
+			
+			</div>
+		</div>
+        </div>
+    <div class="clear"></div>
+    <div class="articles">
+    	<div class="title">
+        	<h2>热门文章</h2>
+            <a href="#" class="more">更多></a><div class="clear" ></div>
+        </div>
+        
+        <div class="content">
+        	<ul>
+            	<li>
+                	<a href="#"><img src="images/ht.jpg" width="285" height="180"></a>
+                    <h3>胡同文化</h3>
+                    <p>来源：每日一文</p>
+                    <p class="desc">对胡同有着特殊的情怀，它是贯通大街的网络。</p>
+                    <p> 
+                    	<i class="zan"></i>
+                        <b class="zan_num">423</b>
+                        <i class="share"></i>
+                        <b class="zan_num">378</b>
+                    </p>
+                </li>
+                <li>
+                	<a href="#"><img src="images/js.jpg" width="285" height="180"></a>
+                    <h3>美国教授写给被开除中国留学生的信</h3>
+                    <p>来源：阅读时间</p>
+                    <p class="desc">做学问的人，必须里外一致，言行一致。</p>
+                    <p> 
+                    	<i class="zan"></i>
+                        <b class="zan_num">427</b>
+                        <i class="share"></i>
+                        <b class="zan_num">362</b>
+                    </p>
+                </li>
+                <li class="li3">
+                	<div class="clear"></div>
+                	<ul class="side">
+                    	<li>
+                        	<i></i>
+                            <p><a href="#">我想你了</a></p>
+                            <span>谁不是血肉之躯，但总有人活出了铮铮铁骨。</span></li>
+               			<li>
+                        	<i></i>
+                            <p><a href="#">千万别给我发微信语音</a></p>
+                            <span>接收合适的信息并用恰当的方式发送信息。</span></li>
+                        <li>
+                       		<i></i>
+                            <p><a href="#">三毛：来生要做一棵树</a></p>
+                            <span>不要问我从哪里来，我的故乡在远方。</span></li>
+                        <li>
+                        	<i></i>
+                            <p><a href="#">独处，是一个人的清欢</a></p>
+                            <span>小舟从此逝，江海寄余生。</span></li>
+                        <li class="li5">
+                        	<i></i>
+                            <p><a href="#">晚安曲 | 斯人若彩虹，遇上方知有</a></p>
+                            <span>小舟从此逝，江海寄余生。</span></li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <div class="about">
+    	<div class="title">
+        	<h2>关于云阅读</h2>><div class="clear" ></div>
+        </div>
+        
+        <div class="content">
+        	<ul>
+            	<li>
+                	<span class="icon1"></span>
+                    <h3>网易云阅读</h3>
+                    <h6>最受欢迎的阅读产品</h6>
+                    <p style="padding-top:3px;">
+                    	<span>关注我们:</span>
+                        <a href="#" class="wx_icon"></a>
+                        <a href="#" class="xl_icon"></a>
+                        <a href="#" class="yx_icon"></a>
+                        <div class="clear"></div>
+                    </p>
+                    <span class="bottom">&nbsp;+ 关注</span>
+                </li>
+                <li>
+                	<span class="icon2"></span>
+                     <h3>作者中心</h3>
+                   	 <h6>原创、自媒体、内容商、漫画</h6>
+                     <p>
+                    	<span>招募作者，福利优厚</span>
+                        <div class="clear"></div>
+                    </p>
+                     <span class="bottom">&nbsp;投稿 ></span>
+                </li>
+                <li>
+                	<span class="icon3"></span>
+                     <h3>客服中心</h3>
+                 	 <h6>欢迎反馈宝贵意见给我们</h6>
+                      <p><span>客服：0571-89853801</span></p>
+                      <p><span>邮件：reader@188.com</span></p>
+                      <p><span>QQ：2978661285</span></p><br />
+                      <p><span>微信号：Reader163</span></p>
+                     <span class="bottom" style="margin-top:94px">意见反馈 ></span>
+                </li>
+                <li style="border:0; width:246px;">
+                	<span class="icon4"></span>
+                     <h3>商务合作</h3>
+               	     <h6>欢迎来电洽谈相关合作</h6>
+                     <p><span>广告：0571-89853126</span></p>
+                      <p><span>资讯：15757831061</span></p><br />
+                       <p><span>图书：0571-89852025</span></p>
+                        <p><span>内容：reader@188.com</span></p>
+                         <p><span>合作微信：xiaomi1426858</span></p>
+                </li>
+            </ul>
+    </div>
+    </div>
+    <div class="clear"></div>
+	<div class="footer_box">
+    	 <div class="footer">
+         	<ul>
+            	<li style=" padding-left:0;">
+                	<h3>出版图书</h3>
+                    <p>
+                    	<a href="#">小说作品</a>
+                        <a href="#">人文社科</a>
+                        <a href="#">成功励志</a>
+                        <a href="#">经济管理</a>
+                        <a href="#">品质生活</a>
+                        <a href="#">计算机</a>
+                        <a href="#">文学作品</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>       
+                <li>
+                	<h3>国风中文网</h3>
+                    <p>
+                    	<a href="#">都市生活</a>
+                        <a href="#">官场职场</a>
+                        <a href="#">玄幻仙侠</a>
+                        <a href="#">科幻奇幻</a>
+                        <a href="#">军事谍战</a>
+                        <a href="#">悬疑探险</a>
+                        <a href="#">灵异恐怖</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>
+                <li>       
+                	<h3>采薇书院</h3>
+                    <p>
+                    	<a href="#">都市言情</a>
+                        <a href="#">穿越架空</a>
+                        <a href="#">种田重生</a>
+                        <a href="#">宫斗宅斗</a>
+                        <a href="#">古风古韵</a>
+                        <a href="#">仙侠幻情</a>
+                        <a href="#">浪漫青春</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>
+                <li>       
+                	<h3>漫画</h3>
+                    <p>
+                    	<a href="#">少年热血</a>
+                        <a href="#">少女恋爱</a>
+                        <a href="#">幽默搞笑</a>
+                        <a href="#">魔幻科幻</a>
+                        <a href="#">青春都市</a>
+                        <a href="#">历史战争</a>
+                        <a href="#">恐怖推理</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>
+                <li>       
+                	<h3>杂志</h3>
+                    <p>
+                    	<a href="#">国家人文</a>
+                        <a href="#">南方人物</a>
+                        <a href="#">南都周刊</a>
+                        <a href="#">博客天下</a>
+                        <a href="#">环球科学</a>
+                        <a href="#">南都娱乐</a>
+                        <a href="#">凤凰周刊</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>       
+                <li style=" padding-right:0; border:0">
+                	<h3>订阅</h3>
+                    <p>
+                    	<a href="#">视觉时尚</a>
+                        <a href="#">科技健康</a>
+                        <a href="#">汽车体育</a>
+                        <a href="#">星座情感</a>
+                        <a href="#">时评科普</a>
+                        <a href="#">旅游美食</a>
+                        <a href="#">文史读书</a>
+                        <a href="#">更多<i></i></a>
+                    </p>
+                </li>
+               
+            </ul>
+         </div>
+    </div>
+    <div class="clear"></div>
+    <div class="f_bottom_box">
+        <div class="f_bottom">
+            <p>
+                <a href="#">网易首页</a><span class="sep"> | </span>
+                <a href="#">公司简介</a><span class="sep"> | </span>
+                <a href="#">客户服务</a><span class="sep"> | </span>
+                <a href="#">相关法律</a><span class="sep"> | </span>
+                <a href="#">网站导航</a><span class="sep"> | </span>
+                <a href="#">意见反馈</a><span class="sep"> | </span>
+                <a href="#">客服电话</a><span class="sep"> | </span>
+                <a href="#">帮助中心</a><span class="sep"> | </span>
+                <a href="#">作者中心</a>
+            </p>
+            <p>网易公司版权所有©1997-2017</p>
+            <p class="center"><span style=" float:left;">分享到：</span>
+                <a href="#" class="wx"></a>
+                <a href="#" class="yx"></a>
+                <a href="#" class="xl"></a>
+                <a href="#" class="qq"></a>
+            </p>
+                
+        </div>
+	</div>
+    <div class="clear"></div>
+    <div id="FloatNav">
+    	我是会飘的导航栏
+    </div>
+   	<script>
+	   	var Dot=document.getElementById("dot").getElementsByTagName("a")
+		var List=document.getElementById("banner_pic").getElementsByTagName("li")
+		var Left=document.getElementById("left")
+		var Right=document.getElementById("right")
+		var box=document.getElementById("banner_pic")
+		var time;
+		var i=0;
+		 Dot[i].className="active";
+	                List[i].style.display="block"
+			/***********************************圆点点击*********************************************/	
+		for (var i = 0; i < Dot.length; i++) {
+	        Dot[i].index = i;
+	        Dot[i].onclick = function(){
+	            for(var j = 0;j<Dot.length;j++){
+	                Dot[j].className="";
+	                List[j].style.display="none"
+	            }
+	            this.className="active";
+	            List[this.index].style.display="block"
+	        }
+	    }	
+	
+		
+		/*********************************banner点击/轮播***********************************************/	
+				
+		function play(bool){
+			for(var i = 0;i<Dot.length;i++){
+	    		if(Dot[i].className=="active"){
+	        		var index = i;
+	        		break;
+	    		}
+			}
+			bool?(index == 0? index=Dot.length-1:index--):(index ==Dot.length-1? index= 0:index++);
+			for(var j = 0;j<Dot.length;j++){
+	    		Dot[j].className="";
+	    		List[j].style.display="none"
+			}
+			Dot[index].className="active";
+			List[index].style.display="block"
+			}
+	
+		Right.onclick=function(){
+			
+			play(false);
+			
+		}
+		
+		
+		Left.onclick=function(){
+			
+			play(true);
+			
+		}
+		
+		var time=setInterval(function(){play(false);},2000)
+		box.onmousemove=function(){
+			clearInterval(time)
+		}
+		box.onmouseout=function(){
+			clearInterval(time)
+			time=setInterval(function(){play(false);},2000)
+		}
+			
+		/*排行榜*/
+		function Rank(obj){
+			var RankingList=document.getElementById(obj).getElementsByTagName("li");
+				var i=0;
+				RankingList[i].className="bl";
+				while(i<RankingList.length) {
+					RankingList[i].onmousemove=function(){
+						var e=0;
+						while(e<RankingList.length){
+						RankingList[e].className=""
+						e++
+						}
+						this.className="bl"
+					}					
+					i++
+				}
+		};
+		Rank('RankingList');
+		Rank('RankingList2');
+		Rank('RankingList3');
+		Rank('RankingList4');
+						
+		window.onscroll = function(){		
+			var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;
+			var FloatNav = document.getElementById('FloatNav');
+			if(scrolltop>180){
+				FloatNav.style.top = scrolltop+'px';			
+			}else{
+				FloatNav.style.top = "-50px";
+			}		
+		};
+			
+		var rec_link=document.getElementById("rec_link").getElementsByTagName("a");
+		var contents=document.getElementById("contents").getElementsByTagName("ul");
+		var i=0;
+		rec_link[i].className="active";
+	    contents[i].style.display="block";
+		for (var i = 0; i < rec_link.length; i++){
+			rec_link[i].index = i;
+	        rec_link[i].onmousemove = function(){
+	            for(var j = 0;j<rec_link.length;j++){
+	                rec_link[j].className="";
+	            	contents[j].style.display="none";
+	            }
+	            this.className="active";
+	            contents[this.index].style.display="block";
+	        }
+	    };		
+	    
+	</script>
+</body>
+</html>
